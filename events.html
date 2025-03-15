@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Connect - Events</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .joined-event-item {
+      background-color: #e0f7fa; /* Light cyan color */
+      border: 1px solid #00796b; /* Dark teal border */
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .joined-event-item p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .joined-events-section {
+      background-color: #f4f4f9;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+
+    .joined-events-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #00796b; /* Dark teal color */
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Student Connect</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+    </nav>
+  </header>
+  
+  <main class="main-content">
+    <h2 class="page-title">Upcoming Events</h2>
+
+    <!-- Section for upcoming events -->
+    <section class="card bg-gradient-blue">
+      <h3>Hackathon 2025</h3>
+      <p>Date: February 10, 2025</p>
+      <button class="btn bg-yellow" onclick="redirectToLearnMore('Hackathon 2025', 'February 10, 2025', 'Join us for an exciting hackathon where teams compete to solve real-world problems.')">Learn More</button>
+      <button class="btn bg-green" onclick="redirectToJoinEvent('Hackathon 2025', 'February 10, 2025')">Join Event</button>
+    </section>
+
+    <section class="card bg-gradient-purple">
+      <h3>Art Society Meetup</h3>
+      <p>Date: February 15, 2025</p>
+      <button class="btn bg-yellow" onclick="redirectToLearnMore('Art Society Meetup', 'February 15, 2025', 'Connect with fellow artists, share ideas, and collaborate on creative projects.')">Learn More</button>
+      <button class="btn bg-green" onclick="redirectToJoinEvent('Art Society Meetup', 'February 15, 2025')">Join Event</button>
+    </section>
+
+    <section class="card bg-gradient-orange">
+      <h3>Music Night</h3>
+      <p>Date: March 5, 2025</p>
+      <button class="btn bg-yellow" onclick="redirectToLearnMore('Music Night', 'March 5, 2025', 'Enjoy a night of live music performances and networking.')">Learn More</button>
+      <button class="btn bg-green" onclick="redirectToJoinEvent('Music Night', 'March 5, 2025')">Join Event</button>
+    </section>
+
+    <!-- Section for joined events -->
+    <section id="joined-events-section" class="joined-events-section">
+      <h3 class="joined-events-title">Your Joined Events</h3>
+      <div id="joined-events-list">
+        <!-- Joined events will be listed here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Student Connect. All rights reserved.
+  </footer>
+
+  <script>
+    function redirectToLearnMore(event, date, description) {
+        const url = `LearnMore.html?event=${encodeURIComponent(event)}&date=${encodeURIComponent(date)}&description=${encodeURIComponent(description)}`;
+        window.location.href = url;
+    }
+
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+
+    function redirectToJoinEvent(eventName, eventDate) {
+        // Save event to localStorage
+        let joinedEvents = JSON.parse(localStorage.getItem("joinedEvents")) || [];
+        joinedEvents.push({ eventName, eventDate });
+        localStorage.setItem("joinedEvents", JSON.stringify(joinedEvents));
+
+        // Show alert and refresh the page to update the joined events section
+        alert(`${eventName} has been added to your joined events!`);
+        displayJoinedEvents();
+    }
+
+    // Function to display the list of joined events
+    function displayJoinedEvents() {
+      let joinedEvents = JSON.parse(localStorage.getItem("joinedEvents")) || [];
+      const joinedEventsList = document.getElementById("joined-events-list");
+
+      // Clear the list first
+      joinedEventsList.innerHTML = '';
+
+      if (joinedEvents.length > 0) {
+        joinedEvents.forEach(event => {
+          const eventDiv = document.createElement("div");
+          eventDiv.classList.add("joined-event-item");
+          eventDiv.innerHTML = `<p><strong>${event.eventName}</strong> - ${event.eventDate}</p>`;
+          joinedEventsList.appendChild(eventDiv);
+        });
+      } else {
+        joinedEventsList.innerHTML = "<p>No events joined yet. Join some events!</p>";
+      }
+    }
+
+    // Call the display function when the page loads
+    window.onload = displayJoinedEvents;
+  </script>
+</body>
+</html>

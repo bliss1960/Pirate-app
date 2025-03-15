@@ -1,0 +1,61 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Student Connect</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Student Connect</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="signin.html" class="nav-link">Sign In</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="card bg-gradient-blue">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <input type="email" id="email" placeholder="Email Address" class="input-field" required>
+        <input type="password" id="password" placeholder="Password" class="input-field" required>
+        <input type="text" id="username" placeholder="Full Name" class="input-field" required>
+        <input type="text" id="course" placeholder="Course" class="input-field" required>
+        <input type="text" id="university" placeholder="University" class="input-field" required>
+        <button type="submit" class="btn bg-green">Sign Up</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Student Connect. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const userName = document.getElementById("username").value;
+      const course = document.getElementById("course").value;
+      const university = document.getElementById("university").value;
+
+      // Save the user's credentials to localStorage
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("userCourse", course);
+      localStorage.setItem("userUniversity", university);
+
+      alert("Sign-up successful! You can now sign in.");
+      window.location.href = "signin.html"; // Redirect to sign-in page
+    });
+  </script>
+</body>
+</html>

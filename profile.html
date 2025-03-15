@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Student Connect</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Check if the user is signed in when the page loads
+    window.onload = function() {
+      const userName = localStorage.getItem("userName");
+      
+      // If no userName is found, redirect to the sign-in page
+      if (!userName) {
+        alert("Please sign in to view your profile.");
+        window.location.href = "signin.html"; // Redirect to sign-in page
+      } else {
+        // Display the profile details
+        document.getElementById("profileName").innerText = userName;
+        document.getElementById("profileCourse").innerText = localStorage.getItem("userCourse");
+        document.getElementById("profileUniversity").innerText = localStorage.getItem("userUniversity");
+      }
+    };
+  </script>
+</head>
+<body>
+  <header class="header">
+    <h1>Student Connect</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- Colorful Profile Card -->
+    <section class="card bg-gradient-blue">
+      <h2>Your Profile</h2>
+      <div class="profile-info">
+        <p><strong>Name:</strong> <span id="profileName"></span></p>
+        <p><strong>Course:</strong> <span id="profileCourse"></span></p>
+        <p><strong>University:</strong> <span id="profileUniversity"></span></p>
+      </div>
+    </section>
+
+    <!-- Add more sections for a colorful experience -->
+    <section class="card bg-gradient-purple">
+      <h2>Your Upcoming Events</h2>
+      <p>Check out the events you're attending!</p>
+      <button class="btn bg-yellow" onclick="window.location.href='events.html'">Explore Events</button>
+    </section>
+    
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Student Connect. All rights reserved.
+  </footer>
+</body>
+</html>

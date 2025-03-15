@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Connect - Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    // Function to handle user sign out
+    function signOut() {
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userCourse");
+      localStorage.removeItem("userUniversity");
+      localStorage.removeItem("email");  // If you are storing email as well
+      localStorage.removeItem("password");  // If you are storing password as well
+      alert("You have been signed out.");
+      window.location.reload();  // Reload the page to reflect the changes
+    }
+
+    // Check if user is signed in and update the navigation bar accordingly
+    window.onload = function() {
+      const isSignedIn = localStorage.getItem("userName");
+      const signInButton = document.getElementById("sign-in-btn");
+      const signOutButton = document.getElementById("sign-out-btn");
+
+      if (isSignedIn) {
+        // Hide Sign In and show Sign Out
+        signInButton.style.display = "none";
+        signOutButton.style.display = "block";
+      } else {
+        // Hide Sign Out and show Sign In
+        signInButton.style.display = "block";
+        signOutButton.style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <h1>Student Connect</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+      
+      <!-- Sign In Button (Will be hidden if user is signed in) -->
+      <a href="signin.html" id="sign-in-btn" class="btn bg-blue">Sign In</a>
+
+      <!-- Sign Out Button (Will be hidden if user is not signed in) -->
+      <a href="javascript:void(0)" id="sign-out-btn" class="btn bg-red" onclick="signOut()">Sign Out</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="card bg-gradient-blue">
+      <h2>Find Friends</h2>
+      <p>Connect with students from your course or other universities.</p>
+      <button class="btn bg-green" onclick="navigateTo('create-profile.html')">Get Started</button>
+    </section>
+
+    <section class="card bg-gradient-purple">
+      <h2>Join Events</h2>
+      <p>Find events and societies to participate in, and never go alone.</p>
+      <button class="btn bg-yellow" onclick="navigateTo('events.html')">Explore Events</button>
+    </section>
+
+    <section class="card bg-gradient-pink">
+      <h2>Get Support</h2>
+      <p>Access emotional support and advice for academic issues.</p>
+      <button class="btn bg-purple" onclick="navigateTo('support.html')">Seek Help</button>
+    </section>
+
+    <section class="card bg-gradient-orange">
+      <h2>Stay Updated</h2>
+      <p>Keep track of everything happening in your university.</p>
+      <button class="btn bg-blue" onclick="navigateTo('news.html')">View News</button>
+    </section>
+
+    <section class="card bg-gradient-green">
+      <h2>Manage Your Profile</h2>
+      <p>Update your details and see your joined events.</p>
+      <button class="btn bg-yellow" onclick="navigateTo('profile.html')">Go to Profile</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Student Connect. All rights reserved.
+  </footer>
+</body>
+</html>

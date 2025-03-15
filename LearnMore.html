@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Event Details</h1>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="support.html" class="nav-link">Support</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2 id="event-title">Event Name</h2>
+        <p id="event-date"><strong>Date:</strong> TBA</p>
+        <p id="event-description">Event details will be displayed here.</p>
+        
+        <button class="btn bg-green" onclick="joinEvent()">Join Event</button>
+
+    </main>
+
+    <footer class="footer">
+        &copy; 2025 Student Connect. All rights reserved.
+    </footer>
+
+    <script>
+        function loadEventDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventName = urlParams.get('event') || 'Unknown Event';
+            const eventDate = urlParams.get('date') || 'TBA';
+            const eventDescription = urlParams.get('description') || 'No details available.';
+
+            document.getElementById('event-title').innerText = eventName;
+            document.getElementById('event-date').innerHTML = `<strong>Date:</strong> ${eventDate}`;
+            document.getElementById('event-description').innerText = eventDescription;
+        }
+
+        window.onload = loadEventDetails;
+    </script>
+    <script>
+        function joinEvent() {
+            const eventName = document.getElementById('event-title').innerText;
+            const eventDate = document.getElementById('event-date').innerText.replace('Date:', '').trim();
+            const eventDescription = document.getElementById('event-description').innerText;
+    
+            // Create a URL with the event details as parameters
+            const url = `JoinEvents.html?event=${encodeURIComponent(eventName)}&date=${encodeURIComponent(eventDate)}&description=${encodeURIComponent(eventDescription)}`;
+            
+            // Redirect to the JoinEvents page with the event data in the URL
+            window.location.href = url;
+        }
+    </script>
+    
+
+    
+</body>
+</html>

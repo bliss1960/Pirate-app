@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Student Connect</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="card bg-gradient-blue">
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" required>
+
+        <label for="university">University:</label>
+        <input type="text" id="university" required>
+
+        <button type="submit" class="btn bg-green">Save Changes</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Student Connect. All rights reserved.
+  </footer>
+
+  <script>
+    // Load existing data
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("name").value = localStorage.getItem("userName") || "John Doe";
+      document.getElementById("course").value = localStorage.getItem("userCourse") || "Computer Science";
+      document.getElementById("university").value = localStorage.getItem("userUniversity") || "Oxford University";
+    });
+
+    // Save new data
+    document.getElementById("editProfileForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      localStorage.setItem("userName", document.getElementById("name").value);
+      localStorage.setItem("userCourse", document.getElementById("course").value);
+      localStorage.setItem("userUniversity", document.getElementById("university").value);
+      window.location.href = "profile.html"; // Redirect back to profile page
+    });
+  </script>
+</body>
+</html>
