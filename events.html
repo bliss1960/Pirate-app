@@ -52,21 +52,21 @@
       <h3>Hackathon 2025</h3>
       <p>Date: February 10, 2025</p>
       <button class="btn bg-yellow" onclick="redirectToLearnMore('Hackathon 2025', 'February 10, 2025', 'Join us for an exciting hackathon where teams compete to solve real-world problems.')">Learn More</button>
-      <button class="btn bg-green" onclick="redirectToJoinEvent('Hackathon 2025', 'February 10, 2025')">Join Event</button>
+      <button class="btn bg-green" onclick="joinEvent('Hackathon 2025', 'February 10, 2025')">Join Event</button>
     </section>
 
     <section class="card bg-gradient-purple">
       <h3>Art Society Meetup</h3>
       <p>Date: February 15, 2025</p>
       <button class="btn bg-yellow" onclick="redirectToLearnMore('Art Society Meetup', 'February 15, 2025', 'Connect with fellow artists, share ideas, and collaborate on creative projects.')">Learn More</button>
-      <button class="btn bg-green" onclick="redirectToJoinEvent('Art Society Meetup', 'February 15, 2025')">Join Event</button>
+      <button class="btn bg-green" onclick="joinEvent('Art Society Meetup', 'February 15, 2025')">Join Event</button>
     </section>
 
     <section class="card bg-gradient-orange">
       <h3>Music Night</h3>
       <p>Date: March 5, 2025</p>
       <button class="btn bg-yellow" onclick="redirectToLearnMore('Music Night', 'March 5, 2025', 'Enjoy a night of live music performances and networking.')">Learn More</button>
-      <button class="btn bg-green" onclick="redirectToJoinEvent('Music Night', 'March 5, 2025')">Join Event</button>
+      <button class="btn bg-green" onclick="joinEvent('Music Night', 'March 5, 2025')">Join Event</button>
     </section>
 
     <!-- Section for joined events -->
@@ -90,6 +90,14 @@
 
     function navigateTo(page) {
         window.location.href = page;
+    }
+
+    function joinEvent(eventName, eventDate) {
+            // Create a URL with the event details as parameters
+            const url = `JoinEvents.html?event=${encodeURIComponent(eventName)}&date=${encodeURIComponent(eventDate)}`;
+            
+            // Redirect to the JoinEvents page with the event data in the URL
+            window.location.href = url;
     }
 
     function redirectToJoinEvent(eventName, eventDate) {

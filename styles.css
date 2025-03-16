@@ -103,12 +103,17 @@ a {
 
 /* Footer */
 .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   padding: 1rem;
   background-color: #1f2937;
   color: white;
   font-size: 0.875rem;
 }
+
 .file-upload {
   display: block;
   background: #4facfe;
