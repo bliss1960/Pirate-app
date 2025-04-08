@@ -10,33 +10,43 @@
     function checkSignInStatus() {
       const userName = localStorage.getItem("userName");
 
-      // If the user is signed in (userName exists in localStorage)
       if (userName) {
-        // Show "Sign Out" and hide "Sign In"
         document.getElementById("signInLink").style.display = "none";
         document.getElementById("signOutLink").style.display = "inline-block";
-        document.getElementById("profileLink").style.display = "inline-block"; // Show Profile link
+        document.getElementById("profileLink").style.display = "inline-block";
       } else {
-        // Show "Sign In" and hide "Sign Out"
         document.getElementById("signInLink").style.display = "inline-block";
         document.getElementById("signOutLink").style.display = "none";
-        document.getElementById("profileLink").style.display = "none"; // Hide Profile link
+        document.getElementById("profileLink").style.display = "none";
       }
     }
 
-    // Call the function when the page loads
     window.onload = checkSignInStatus;
 
-    // Function to sign out the user
     function signOut() {
       localStorage.removeItem("userName");
       localStorage.removeItem("userCourse");
       localStorage.removeItem("userUniversity");
-      localStorage.removeItem("email"); // if you're storing email
-      localStorage.removeItem("password"); // if you're storing password
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
 
       alert("You have been signed out.");
-      window.location.href = "index.html"; // Redirect to home page after signing out
+      window.location.href = "index.html";
+    }
+
+    // Chat functionality
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const message = input.value.trim();
+      if (message !== "") {
+        const messagesContainer = document.getElementById("chatMessages");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("chat-message");
+        messageElement.textContent = "You: " + message;
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        input.value = "";
+      }
     }
   </script>
 </head>
@@ -48,10 +58,8 @@
       <a href="events.html" class="nav-link">Events</a>
       <a href="support.html" class="nav-link">Support</a>
       <a href="news.html" class="nav-link">News</a>
-      <a id="profileLink" href="profile.html" class="nav-link" style="display:none;">Profile</a> <!-- Hidden initially -->
-      <!-- Sign In link (visible if not signed in) -->
+      <a id="profileLink" href="profile.html" class="nav-link" style="display:none;">Profile</a>
       <a id="signInLink" href="signin.html" class="btn bg-blue">Sign In</a>
-      <!-- Sign Out link (visible if signed in) -->
       <a id="signOutLink" href="javascript:void(0);" class="btn bg-blue" onclick="signOut()">Sign Out</a>
     </nav>
   </header>
@@ -91,5 +99,15 @@
   <footer class="footer">
     &copy; 2025 Student Connect. All rights reserved.
   </footer>
+
+  <!-- Chat Box -->
+  <div class="chat-box">
+    <div class="chat-header">Chat with Us!</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 </body>
 </html>
