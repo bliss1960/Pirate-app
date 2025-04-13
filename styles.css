@@ -21,7 +21,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(90deg, #d54ffe, #d54ffe);
+  background: linear-gradient(90deg, #A477B1);
   color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -60,21 +60,25 @@ a {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.bg-gradient-blue {
-  background: linear-gradient(135deg, #3d45bc, #00f2fe);
+.bg-gradient-purple {
+  background: linear-gradient(135deg, #7b4b8f, #aa6fc2); /* Deep purple to a muted lilac */
 }
 
-.bg-gradient-purple {
-  background: linear-gradient(135deg, #bb50b2, #6e48aa);
+.bg-gradient-light-purple {
+  background: linear-gradient(135deg, #a67ade, #d48dea); /* Soft purple to light pinkish purple */
 }
 
 .bg-gradient-pink {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  background: linear-gradient(135deg, #f9a8d4, #eb6fa8); /* Light pink to a warmer pink */
 }
 
-.bg-gradient-red {
-  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+.bg-gradient-purple-pink {
+  background: linear-gradient(135deg, rgb(237, 136, 237), rgb(241, 179, 248));
 }
+.bg-gradient-red {
+  background: linear-gradient(135deg, #d8598a, #a2377e); /* Warm pinkish red to purple-red */
+}
+
 
 /* Buttons */
 .btn {
@@ -88,17 +92,17 @@ a {
   cursor: pointer;
 }
 
-.bg-green { background-color: #34d399; }
-.bg-green:hover { background-color: #059669; }
+.btn-neutral-light {
+  background-color: #e0e0e0; /* Light gray */
+  color: #333;
+}
+.btn-neutral-light:hover {
+  background-color: #d3d3d3; /* Slightly darker light gray for hover */
+}
 
-.bg-yellow { background-color: #fbbf24; }
-.bg-yellow:hover { background-color: #d97706; }
+.bg-black { background-color: black; }
+.bg-black:hover { background-color: rgb(83, 83, 83); }
 
-.bg-purple { background-color: #a855f7; }
-.bg-purple:hover { background-color: #7c3aed; }
-
-.bg-blue { background-color: #3b82f6; }
-.bg-blue:hover { background-color: #2563eb; }
 
 /* Footer */
 .footer {
@@ -108,7 +112,7 @@ a {
   width: 100%;
   text-align: center;
   padding: 1rem;
-  background-color: #d54ffe;
+  background-color: #A477B1;
   color: white;
   font-size: 0.875rem;
 }
@@ -146,7 +150,7 @@ a {
 }
 
 .chat-header {
-  background: linear-gradient(90deg, #d54ffe, #d54ffe);
+  background: linear-gradient(90deg, #d48dea);
   color: white;
   padding: 10px;
   text-align: center;
@@ -175,7 +179,7 @@ a {
 }
 
 .chat-input button {
-  background: #d54ffe;
+  background: #d48dea;
   color: white;
   border: none;
   padding: 8px 12px;

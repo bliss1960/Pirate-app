@@ -5,23 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - Student Connect</title>
   <link rel="stylesheet" href="styles.css">
-  <script>
-    // Check if the user is signed in when the page loads
-    window.onload = function() {
-      const userName = localStorage.getItem("userName");
-      
-      // If no userName is found, redirect to the sign-in page
-      if (!userName) {
-        alert("Please sign in to view your profile.");
-        window.location.href = "signin.html"; // Redirect to sign-in page
-      } else {
-        // Display the profile details
-        document.getElementById("profileName").innerText = userName;
-        document.getElementById("profileCourse").innerText = localStorage.getItem("userCourse");
-        document.getElementById("profileUniversity").innerText = localStorage.getItem("userUniversity");
-      }
-    };
-  </script>
 </head>
 <body>
   <header class="header">
@@ -36,7 +19,7 @@
 
   <main class="main-content">
     <!-- Colorful Profile Card -->
-    <section class="card bg-gradient-blue">
+    <section class="card bg-gradient-purple">
       <h2>Your Profile</h2>
       <div class="profile-info">
         <p><strong>Name:</strong> <span id="profileName"></span></p>
@@ -46,10 +29,18 @@
     </section>
 
     <!-- Add more sections for a colorful experience -->
-    <section class="card bg-gradient-purple">
+    <section class="card bg-gradient-purple-pink">
       <h2>Your Upcoming Events</h2>
       <p>Check out the events you're attending!</p>
-      <button class="btn bg-yellow" onclick="window.location.href='events.html'">Explore Events</button>
+      <button class="btn btn-neutral-light" onclick="window.location.href='events.html'">Explore Events</button>
+    </section>
+
+    <section class="card bg-gradient-red">
+      <h2>Your interests</h2>
+      <div id="interests-list">
+        
+      </div>
+      <button class="btn btn-neutral-light" onclick="window.location.href='findFriends.html'">Find friends with similar interests</button>
     </section>
     
   </main>
@@ -57,5 +48,37 @@
   <footer class="footer">
     &copy; 2025 Student Connect. All rights reserved.
   </footer>
+
+  <script>
+    function displayInterests() {
+      let interests = JSON.parse(localStorage.getItem("interests")) || [];
+      const interestsList = document.getElementById("interests-list");
+
+      if(interests.length > 0 ) {
+        interests.forEach(interest => {
+          const interestsDiv = document.createElement("div");
+          interestsDiv.classList.add("interests-item");
+          interestsDiv.innerHTML = `<p><strong>${interest}</strong></p>`;
+          interestsList.appendChild(interestsDiv);
+        })
+      }
+    }
+    // Check if the user is signed in when the page loads
+    window.onload = function() {
+      const userName = localStorage.getItem("userName");
+      
+      // If no userName is found, redirect to the sign-in page
+      if (!userName) {
+        alert("Please sign in to view your profile.");
+        window.location.href = "signin.html"; // Redirect to sign-in page
+      } else {
+        // Display the profile details
+        document.getElementById("profileName").innerText = userName;
+        document.getElementById("profileCourse").innerText = localStorage.getItem("userCourse");
+        document.getElementById("profileUniversity").innerText = localStorage.getItem("userUniversity");
+      }
+      displayInterests();
+    };
+  </script>
 </body>
 </html>

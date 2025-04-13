@@ -31,7 +31,7 @@
             <label for="student-id">Student ID (Optional):</label>
             <input type="text" id="student-id" name="student-id"><br>
 
-            <button type="submit" class="btn bg-green">Join Now</button>
+            <button type="submit" class="btn bg-black">Join Now</button>
         </form>
 
         <p id="success-message" style="display: none; color: green; font-weight: bold;">
@@ -44,10 +44,13 @@
     </footer>
 
     <script>
+        let eventName = '';
+        let eventDate = '';
+
         function loadEventDetails() {
             const urlParams = new URLSearchParams(window.location.search);
-            const eventName = urlParams.get('event') || 'Unknown Event';
-            const eventDate = urlParams.get('date') || 'TBA';
+            eventName = urlParams.get('event') || 'Unknown Event';
+            eventDate = urlParams.get('date') || 'TBA';
 
             document.getElementById('event-title').innerText = eventName;
             document.getElementById('event-date').innerHTML = `<strong>Date:</strong> ${eventDate}`;
@@ -55,6 +58,12 @@
 
         document.getElementById('join-event-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent page refresh
+            
+            let joinedEvents = JSON.parse(localStorage.getItem("joinedEvents")) || [];
+            joinedEvents.push({ eventName: eventName, eventDate: eventDate });
+            localStorage.setItem("joinedEvents", JSON.stringify(joinedEvents));
+            console.log("Saving:", { eventName, eventDate });
+            
             document.getElementById('success-message').style.display = 'block';
         });
 

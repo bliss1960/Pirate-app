@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find friends</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Find friends</h1>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="support.html" class="nav-link">Support</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div>
+            <h2 id="choose-interest">Choose your interests from the list below</h2><br>
+
+            <form id="interests-form">
+                <input type="checkbox" id="hobby1" name="hobby1" value="Reading">
+                <label for="hobby1">Reading</label><br>
+                <input type="checkbox" id="hobby2" name="hobby2" value="Sports">
+                <label for="vehicle2">Sports</label><br>
+                <input type="checkbox" id="hobby3" name="hobby3" value="Video games">
+                <label for="vehicle3">Video games</label><br>
+                <input type="checkbox" id="hobby4" name="hobby4" value="Baking">
+                <label for="vehicle3">Baking</label><br>
+                <input type="checkbox" id="hobby5" name="hobby5" value="Music">
+                <label for="vehicle3">Music</label><br><br>
+                <input type="submit" class="btn bg-black" value="Submit">
+            </form>
+
+            <br>
+            <section class="card bg-gradient-purple">
+                <h2>Your interests</h2>
+                <div id="interests-list">
+                  
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <h2>People with similar interests</h2>
+            <div id="matching-people">
+                  
+            </div>
+            <p></p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('interests-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent page refresh
+
+            // Save interests to localStorage
+            const checkboxes = document.querySelectorAll('#interests-form input[type="checkbox"]');
+            let interests = [];
+
+            // Collect all the checked values
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    interests.push(checkbox.value);
+                }
+            });
+
+            localStorage.setItem("interests", JSON.stringify(interests));
+
+            // Reload the page to update the interests and mathces
+            location.reload();
+        });
+
+        function addInterests() {
+            // Save event to localStorage
+            let joinedEvents = JSON.parse(localStorage.getItem("joinedEvents")) || [];
+            joinedEvents.push({ eventName, eventDate });
+            localStorage.setItem("joinedEvents", JSON.stringify(joinedEvents));
+
+            alert(`${eventName} has been added to your joined events!`);
+        }
+
+        function displayInterests() {
+            let interests = JSON.parse(localStorage.getItem("interests")) || [];
+            const interestsList = document.getElementById("interests-list");
+
+            if(interests.length > 0 ) {
+                interests.forEach(interest => {
+                const interestsDiv = document.createElement("div");
+                interestsDiv.classList.add("interests-item");
+                interestsDiv.innerHTML = `<p><strong>${interest}</strong></p>`;
+                interestsList.appendChild(interestsDiv);
+                })
+            }
+        }
+
+        // Example profiles to visualize matching with people
+        const profiles = [
+            {
+            "name": "Olivia", "university": "Robert Gordon University", "course": "Psychology", 
+            "interests": ["Reading", "Baking"]}, 
+            {
+            "name": "Ben", "university": "Robert Gordon University", "course": "Law",
+            "interests": ["Sports", "Music"]}, 
+            {
+            "name": "Rachel", "university": "University of Aberdeen", "course": "Medicine",
+            "interests": ["Video games"]
+            },
+            {
+            "name": "Zach", "university": "Robert Gordon University", "course": "Business", 
+            "interests": ["Music"]
+            },
+            {
+            "name": "Molly", "university": "University of Aberdeen", "course": "Computing",
+            "interests": ["Baking"]
+            },
+            {
+            "name": "Taylor", "university": "Robert Gordon University", "course": "Nursing",
+            "interests": ["Reading", "Sports", "Music"]
+            },
+            {
+            "name": "Andrew", "university": "Robert Gordon University", "course": "Architecture",
+            "interests": ["Sports", "Video games"]
+            }
+        ];
+        
+        function findMatchingPeople() {
+            let userInterests = JSON.parse(localStorage.getItem("interests")) || [];
+            const matches = [];
+
+            // Find matching interests from profiles
+            profiles.forEach(profile => {
+                const sharedInterests = profile.interests.filter(interest =>
+                userInterests.includes(interest)
+            );
+            
+            // Add information about the profile to the match
+            if (sharedInterests.length > 0) {
+                matches.push({
+                    name: profile.name,
+                    university: profile.university,
+                    course: profile.course,
+                    sharedInterests: sharedInterests
+                });
+                }
+            });
+
+            return matches;
+        }
+
+        function displayMatches() {
+            const matches = findMatchingPeople();
+            const matchList = document.getElementById("matching-people");
+
+            // If no matches are found display a message.
+            if (matches.length === 0) {
+                matchList.innerHTML = "<p>No matching profiles found.</p>";
+                return;
+            }
+
+            // Create info about match profile
+            matches.forEach(match => {
+            const matchDiv = document.createElement("div");
+            matchDiv.classList.add("matching-person");
+            matchDiv.innerHTML = `
+                <h4>${match.name}</h4>
+                <p><strong>University:</strong> ${match.university}</p>
+                <p><strong>Course:</strong> ${match.course}</p>
+                <p><strong>Shared Interests:</strong> ${match.sharedInterests.join(", ")}</p>
+                <button class="btn btn-neutral-light">Connect with ${match.name}</button>
+                `;
+            matchList.appendChild(matchDiv);
+            });
+        }
+
+        window.onload = function() {
+            displayInterests();
+            displayMatches();
+        }
+
+    </script>
+
+    <footer class="footer">
+        &copy; 2025 Student Connect. All rights reserved.
+    </footer>
+</body>
+</html>
