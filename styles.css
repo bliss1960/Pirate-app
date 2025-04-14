@@ -21,7 +21,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(90deg, #A477B1);
+  background: linear-gradient(90deg, #7b4b8f);
   color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -112,7 +112,7 @@ a {
   width: 100%;
   text-align: center;
   padding: 1rem;
-  background-color: #A477B1;
+  background-color: #7b4b8f;
   color: white;
   font-size: 0.875rem;
 }
