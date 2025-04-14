@@ -38,17 +38,46 @@
     function sendMessage() {
       const input = document.getElementById("chatInput");
       const message = input.value.trim();
+      const messagesContainer = document.getElementById("chatMessages");
+
       if (message !== "") {
-        const messagesContainer = document.getElementById("chatMessages");
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("chat-message");
-        messageElement.textContent = "You: " + message;
-        messagesContainer.appendChild(messageElement);
+        const userMessage = document.createElement("div");
+        userMessage.classList.add("chat-message");
+        userMessage.textContent = "You: " + message;
+        messagesContainer.appendChild(userMessage);
+
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         input.value = "";
+
+        setTimeout(() => {
+          const autoReply = document.createElement("div");
+          autoReply.classList.add("chat-message");
+
+          const lowerCaseMessage = message.toLowerCase();
+          let reply = "";
+
+          if (lowerCaseMessage === "hi" || lowerCaseMessage === "hello") {
+            reply = "Student Connect Bot: Hello! How can I assist you today?";
+          } else if (lowerCaseMessage === "help") {
+            reply = "Student Connect Bot: Sure! You can ask about events, support, or your profile.";
+          } else if (lowerCaseMessage === "events") {
+            reply = "Student Connect Bot: You can explore exciting events by clicking on the 'Events' tab!";
+          } else if (lowerCaseMessage === "profile") {
+            reply = "Student Connect Bot: Visit your profile to update your details and check your joined events.";
+          } else if (lowerCaseMessage === "support") {
+            reply = "Student Connect Bot: You can access support through the 'Support' section. We're here to help!";
+          } else {
+            reply = "Student Connect Bot: I'm not sure how to answer that. Try asking about 'events', 'profile', or 'support'.";
+          }
+
+          autoReply.textContent = reply;
+          messagesContainer.appendChild(autoReply);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 500);
       }
     }
   </script>
+
 </head>
 <body>
   <header class="header">
