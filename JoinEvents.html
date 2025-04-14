@@ -65,6 +65,9 @@
             console.log("Saving:", { eventName, eventDate });
             
             document.getElementById('success-message').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'events.html';
+            }, 1500);
         });
 
         window.onload = loadEventDetails;
